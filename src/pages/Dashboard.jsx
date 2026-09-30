@@ -15,6 +15,10 @@ import {
   getUsers,
   getCarts,
 } from "../services/api";
+import RevenueChart from "../components/RevenueChart";
+import CategoryChart from "../components/CategoryChart";
+import TopProducts from "../components/TopProducts";
+import RecentOrders from "../components/RecentOrders";
 
 function Dashboard() {
   const [products, setProducts] = useState([]);
@@ -212,56 +216,127 @@ function Dashboard() {
 
       </div>
 
-      {/* Revenue */}
+      {/* Charts */}
 
-      <div
-        className="animate-fade-up mt-6 rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm"
-        style={{
-          animationDelay: "400ms",
-        }}
-      >
+<div className="mt-6 grid gap-6 xl:grid-cols-3">
 
-        <div className="flex items-center justify-between">
+  {/* Revenue */}
 
-          <div>
-            <h3 className="text-lg font-bold">
-              Revenue Overview
-            </h3>
+  <div
+    className="animate-fade-up rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm xl:col-span-2"
+    style={{
+      animationDelay: "400ms",
+    }}
+  >
 
-            <p className="mt-1 text-sm text-slate-500">
-              Revenue performance across your orders
-            </p>
-          </div>
+    <div className="mb-5 flex items-center justify-between">
 
-          <select className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none">
-            <option>Last 7 days</option>
-            <option>Last 30 days</option>
-            <option>Last 90 days</option>
-          </select>
+      <div>
+        <h3 className="text-lg font-bold">
+          Revenue Overview
+        </h3>
 
-        </div>
-
-        <div className="mt-6 flex h-72 items-center justify-center rounded-xl bg-slate-50">
-
-          <div className="text-center">
-
-            <div className="animate-float mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm">
-              <TrendingUp className="text-slate-400" />
-            </div>
-
-            <p className="font-medium text-slate-500">
-              Revenue chart coming next
-            </p>
-
-            <p className="mt-1 text-sm text-slate-400">
-              We'll visualize your API data here.
-            </p>
-
-          </div>
-
-        </div>
-
+        <p className="mt-1 text-sm text-slate-500">
+          Revenue generated from recent orders
+        </p>
       </div>
+
+      <select className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none">
+        <option>Recent Orders</option>
+        <option>All Orders</option>
+      </select>
+
+    </div>
+
+    <RevenueChart carts={carts} />
+
+  </div>
+
+
+  {/* Category */}
+
+  <div
+    className="animate-fade-up rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm"
+    style={{
+      animationDelay: "500ms",
+    }}
+  >
+
+    <div className="mb-5">
+
+      <h3 className="text-lg font-bold">
+        Products by Category
+      </h3>
+
+      <p className="mt-1 text-sm text-slate-500">
+        Product distribution
+      </p>
+
+    </div>
+
+    <CategoryChart products={products} />
+
+  </div>
+
+</div>
+
+
+{/* Products + Orders */}
+
+<div className="mt-6 grid gap-6 xl:grid-cols-2">
+
+  {/* Top Products */}
+
+  <div
+    className="animate-fade-up rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm"
+    style={{
+      animationDelay: "600ms",
+    }}
+  >
+
+    <div className="mb-5">
+
+      <h3 className="text-lg font-bold">
+        Top Products
+      </h3>
+
+      <p className="mt-1 text-sm text-slate-500">
+        Highest rated products
+      </p>
+
+    </div>
+
+    <TopProducts products={products} />
+
+  </div>
+
+
+  {/* Recent Orders */}
+
+  <div
+    className="animate-fade-up rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm"
+    style={{
+      animationDelay: "700ms",
+    }}
+  >
+
+    <div className="mb-5">
+
+      <h3 className="text-lg font-bold">
+        Recent Orders
+      </h3>
+
+      <p className="mt-1 text-sm text-slate-500">
+        Latest transactions
+      </p>
+
+    </div>
+
+    <RecentOrders carts={carts} />
+
+  </div>
+
+</div>
 
     </main>
   );
