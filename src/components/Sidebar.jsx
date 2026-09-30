@@ -10,7 +10,7 @@ import {
 
 function Sidebar() {
   return (
-    <aside className="w-64 min-h-screen bg-slate-900 text-white p-5">
+    <aside className="hidden min-h-screen w-64 shrink-0 bg-slate-900 p-5 text-white md:block">
 
       {/* Logo */}
       <div className="mb-8">
