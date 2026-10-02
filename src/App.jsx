@@ -1,16 +1,30 @@
+import { useState } from "react";
+
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import MobileSidebar from "./components/MobileSidebar";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
-  return (
-    <div className="flex min-h-screen bg-slate-100">
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  return (
+    <div className="flex min-h-screen bg-slate-50">
+
+      {/* Desktop sidebar */}
       <Sidebar />
 
-      <div className="flex flex-1 flex-col">
+      {/* Mobile sidebar */}
+      <MobileSidebar
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+      />
 
-        <Navbar />
+      <div className="flex min-w-0 flex-1 flex-col">
+
+        <Navbar
+          onMenuClick={() => setMobileMenuOpen(true)}
+        />
 
         <Dashboard />
 
