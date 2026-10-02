@@ -8,7 +8,7 @@ import {
   LogOut,
 } from "lucide-react";
 
-function Sidebar() {
+function Sidebar({ activePage, onNavigate }) {
   const menuItems = [
     {
       name: "Dashboard",
@@ -40,25 +40,31 @@ function Sidebar() {
     <aside className="hidden min-h-screen w-64 shrink-0 border-r border-slate-800 bg-slate-950 p-5 text-white md:block">
       {/* Logo */}
       <div className="mb-10">
-        <h1 className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text font-['Manrope'] text-2xl font-extrabold text-transparent">
-          Analytics
-        </h1>
+        <button
+          onClick={() => onNavigate("Dashboard")}
+          className="text-left"
+        >
+          <h1 className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text font-['Manrope'] text-2xl font-extrabold text-transparent">
+            Analytics
+          </h1>
 
-        <p className="mt-1 text-sm text-slate-500">
-          Admin Dashboard
-        </p>
+          <p className="mt-1 text-sm text-slate-500">
+            Admin Dashboard
+          </p>
+        </button>
       </div>
 
       {/* Navigation */}
       <nav className="space-y-2">
-        {menuItems.map((item, index) => {
+        {menuItems.map((item) => {
           const Icon = item.icon;
 
-          const isActive = index === 0;
+          const isActive = activePage === item.name;
 
           return (
             <button
               key={item.name}
+              onClick={() => onNavigate(item.name)}
               className={`group flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium transition-all duration-200 ${
                 isActive
                   ? "bg-white text-slate-900 shadow-lg shadow-black/10"
@@ -77,7 +83,13 @@ function Sidebar() {
               <span>{item.name}</span>
 
               {item.name === "Analytics" && (
-                <span className="ml-auto rounded-full bg-indigo-500/20 px-2 py-0.5 text-[10px] font-bold text-indigo-400">
+                <span
+                  className={`ml-auto rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                    isActive
+                      ? "bg-indigo-100 text-indigo-600"
+                      : "bg-indigo-500/20 text-indigo-400"
+                  }`}
+                >
                   NEW
                 </span>
               )}
@@ -90,7 +102,10 @@ function Sidebar() {
       <div className="absolute bottom-5 w-[calc(16rem-2.5rem)]">
         <div className="mb-4 border-t border-slate-800" />
 
-        <button className="group flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-400 transition-all duration-200 hover:bg-red-500/10 hover:text-red-400">
+        <button
+          onClick={() => alert("Logout functionality coming soon")}
+          className="group flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-400 transition-all duration-200 hover:bg-red-500/10 hover:text-red-400"
+        >
           <LogOut
             size={19}
             className="transition-transform duration-200 group-hover:-translate-x-1"
